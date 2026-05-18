@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const quickLinks = [
   { href: "/", label: "Home" },
@@ -23,9 +24,13 @@ export default function Footer() {
           {/* Brand block */}
           <div className="sm:col-span-2">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-full bg-maroon-900 flex items-center justify-center font-black text-white text-sm">
-                UM
-              </div>
+              <Image
+                src="/universityofmontanamerchstorelogo.png"
+                alt="University of Montana Merch Store"
+                width={40}
+                height={40}
+                className="h-10 w-auto"
+              />
               <div className="leading-tight">
                 <div className="font-bold text-base">University of Montana</div>
                 <div className="text-gray-400 text-xs tracking-widest uppercase">Merch Store</div>
