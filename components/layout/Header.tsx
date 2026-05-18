@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 
@@ -24,13 +25,14 @@ export default function Header() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
-            <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center font-black text-maroon-900 text-sm tracking-tight">
-              UM
-            </div>
-            <div className="hidden sm:block leading-tight">
-              <div className="text-white font-bold text-sm">University of Montana</div>
-              <div className="text-white/60 text-[10px] tracking-widest uppercase">Merch Store</div>
-            </div>
+            <Image
+              src="/universityofmontanamerchstorelogo.png"
+              alt="University of Montana Merch Store"
+              width={40}
+              height={40}
+              className="h-10 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop nav */}
