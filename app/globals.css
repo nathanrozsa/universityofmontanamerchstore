@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply text-gray-900 bg-white;
+  }
+}
+
+@layer utilities {
+  /* Smooth image scale on hover for cards */
+  .card-image-hover img {
+    @apply transition-transform duration-500;
+  }
+  .card-image-hover:hover img {
+    @apply scale-105;
+  }
+}
