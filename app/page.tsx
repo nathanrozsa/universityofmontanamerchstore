@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import HeroBanner from "@/components/home/HeroBanner";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
-import Categories from "@/components/home/Categories";
+// import Categories from "@/components/home/Categories";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -35,7 +35,7 @@ export default function HomePage() {
       </div>
 
       <FeaturedProducts />
-      <Categories />
+      {/* <Categories /> */}
 
       {/* CTA Banner */}
       <section className="py-20 bg-maroon-900">
