@@ -40,7 +40,7 @@ export default function AboutPage() {
       <section className="relative py-24 bg-maroon-900 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1400&auto=format&fit=crop&q=60"
+            src="/universityofmontanacampus.jpg"
             alt="University campus"
             fill
             className="object-cover opacity-15"
