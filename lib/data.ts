@@ -61,9 +61,9 @@ export const products: Product[] = [
     longDescription:
       "Stay hydrated in Griz style with this premium 32oz stainless steel water bottle. Double-wall vacuum insulation keeps drinks cold for 24 hours and hot for 12. The wide mouth opening is easy to fill and clean. Features the Grizzlies logo laser-engraved on the side.",
     images: [
-      "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1559829067-c0aa0fbe8a52?w=800&auto=format&fit=crop&q=80",
-    ],
+  "/universityofmontanamerchstorewaterbottle.png",
+  "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800&auto=format&fit=crop&q=80",
+],
     colors: ["Maroon", "Silver", "Black"],
     inStock: true,
     featured: false,
