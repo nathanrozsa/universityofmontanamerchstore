@@ -79,7 +79,7 @@ export const products: Product[] = [
     longDescription:
       "Stay warm and stylish with this premium Montana Script Hoodie. Features a bold script 'Montana' design across the chest, kangaroo pocket, and a cozy fleece-lined interior. The drawstring hood and ribbed cuffs provide a snug, comfortable fit. Perfect for cool Montana evenings at the game.",
     images: [
-  "/universityofmontanahoodie.jpg",
+  "/universityofmontanamerchstorehoodie.jpg",
   "https://images.unsplash.com/photo-1620799139507-2a76f79a2f4d?w=800&auto=format&fit=crop&q=80",
 ],
     sizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
