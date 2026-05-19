@@ -89,8 +89,8 @@ export default function ShopPage() {
           ))}
         </select>
 
-        {/* Mobile filter toggle */}
-        <button
+        {/* Mobile filter toggle — hidden (sidebar removed) */}
+        {/* <button
           onClick={() => setFiltersOpen((o) => !o)}
           className="lg:hidden flex items-center gap-2 py-2.5 px-4 border border-gray-200 rounded-xl text-sm font-medium hover:border-gray-300 transition"
         >
@@ -98,12 +98,11 @@ export default function ShopPage() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
           </svg>
           Filters
-        </button>
+        </button> */}
       </div>
 
-      <div className="flex gap-8">
-        {/* Sidebar filters — desktop always visible, mobile conditional */}
-        <div className={`w-52 flex-shrink-0 ${filtersOpen ? "block" : "hidden"} lg:block`}>
+      {/* Sidebar filters — commented out */}
+        {/* <div className={`w-52 flex-shrink-0 ${filtersOpen ? "block" : "hidden"} lg:block`}>
           <div className="sticky top-24 bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
             <ProductFilters
               selectedCategory={category}
@@ -113,7 +112,7 @@ export default function ShopPage() {
               onReset={resetFilters}
             />
           </div>
-        </div>
+        </div> */}
 
         {/* Product grid */}
         <div className="flex-1 min-w-0">
