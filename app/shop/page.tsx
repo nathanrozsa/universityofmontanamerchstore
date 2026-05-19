@@ -101,8 +101,9 @@ export default function ShopPage() {
         </button>
       </div>
 
-      {/* Sidebar filters — commented out */}
-        {/* <div className={`w-52 flex-shrink-0 ${filtersOpen ? "block" : "hidden"} lg:block`}>
+      <div className="flex gap-8">
+        {/* Sidebar filters — desktop always visible, mobile conditional */}
+        <div className={`w-52 flex-shrink-0 ${filtersOpen ? "block" : "hidden"} lg:block`}>
           <div className="sticky top-24 bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
             <ProductFilters
               selectedCategory={category}
@@ -112,7 +113,7 @@ export default function ShopPage() {
               onReset={resetFilters}
             />
           </div>
-        </div> */}
+        </div>
 
         {/* Product grid */}
         <div className="flex-1 min-w-0">
