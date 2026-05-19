@@ -51,6 +51,23 @@ export const products: Product[] = [
     featured: true,
     badge: "Best Seller",
   },
+{
+    id: "5",
+    slug: "grizzlies-water-bottle",
+    name: "Grizzlies Water Bottle",
+    price: 34.99,
+    category: "accessories",
+    description: "Insulated stainless steel water bottle with Grizzlies logo, 32oz.",
+    longDescription:
+      "Stay hydrated in Griz style with this premium 32oz stainless steel water bottle. Double-wall vacuum insulation keeps drinks cold for 24 hours and hot for 12. The wide mouth opening is easy to fill and clean. Features the Grizzlies logo laser-engraved on the side.",
+    images: [
+      "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1559829067-c0aa0fbe8a52?w=800&auto=format&fit=crop&q=80",
+    ],
+    colors: ["Maroon", "Silver", "Black"],
+    inStock: true,
+    featured: false,
+  },
   {
     id: "2",
     slug: "montana-script-hoodie",
@@ -62,6 +79,7 @@ export const products: Product[] = [
     longDescription:
       "Stay warm and stylish with this premium Montana Script Hoodie. Features a bold script 'Montana' design across the chest, kangaroo pocket, and a cozy fleece-lined interior. The drawstring hood and ribbed cuffs provide a snug, comfortable fit. Perfect for cool Montana evenings at the game.",
     images: [
+      "/universityofmontanahoodie.jpg",
       "https://images.unsplash.com/photo-1556821840-3a63f15232d6?w=800&auto=format&fit=crop&q=80",
       "https://images.unsplash.com/photo-1620799139507-2a76f79a2f4d?w=800&auto=format&fit=crop&q=80",
     ],
@@ -71,6 +89,7 @@ export const products: Product[] = [
     featured: true,
     badge: "Sale",
   },
+  /*
   {
     id: "3",
     slug: "um-structured-cap",
@@ -106,23 +125,6 @@ export const products: Product[] = [
     inStock: true,
     featured: true,
     badge: "New",
-  },
-  {
-    id: "5",
-    slug: "grizzlies-water-bottle",
-    name: "Grizzlies Water Bottle",
-    price: 34.99,
-    category: "accessories",
-    description: "Insulated stainless steel water bottle with Grizzlies logo, 32oz.",
-    longDescription:
-      "Stay hydrated in Griz style with this premium 32oz stainless steel water bottle. Double-wall vacuum insulation keeps drinks cold for 24 hours and hot for 12. The wide mouth opening is easy to fill and clean. Features the Grizzlies logo laser-engraved on the side.",
-    images: [
-      "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1559829067-c0aa0fbe8a52?w=800&auto=format&fit=crop&q=80",
-    ],
-    colors: ["Maroon", "Silver", "Black"],
-    inStock: true,
-    featured: false,
   },
   {
     id: "6",
@@ -250,4 +252,5 @@ export const products: Product[] = [
     featured: false,
     badge: "Sale",
   },
+  */
 ];
