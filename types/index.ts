@@ -13,6 +13,7 @@ export interface Product {
   inStock: boolean;
   featured: boolean;
   badge?: string;
+  stripePriceId?: string;
 }
 
 export interface Category {

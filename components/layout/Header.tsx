@@ -4,8 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useCart } from "@/context/CartContext";
-
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/shop", label: "Shop" },
@@ -16,7 +14,6 @@ const navLinks = [
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
-  const { itemCount } = useCart();
 
   return (
     <header className="sticky top-0 z-50 bg-maroon-900 text-white shadow-lg">
@@ -79,11 +76,6 @@ export default function Header() {
                   d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.83-7.08a60.026 60.026 0 00-17.5 0c.36 1.2.696 2.41.996 3.63m3.456 2.45H7.5"
                 />
               </svg>
-              {itemCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 bg-copper-500 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
-                  {itemCount > 9 ? "9+" : itemCount}
-                </span>
-              )}
             </Link>
 
             {/* Mobile hamburger */}

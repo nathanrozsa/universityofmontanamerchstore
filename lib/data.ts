@@ -50,6 +50,7 @@ export const products: Product[] = [
     inStock: true,
     featured: true,
     badge: "Best Seller",
+    stripePriceId: "price_1TYv2pHNrnri6kZxYNltQ9cp",
   },
 {
     id: "5",
@@ -67,6 +68,7 @@ export const products: Product[] = [
     colors: ["Maroon", "Silver", "Black"],
     inStock: true,
     featured: false,
+    stripePriceId: "price_1TYv64HNrnri6kZx9f44wljo",
   },
   {
     id: "2",
@@ -87,6 +89,7 @@ export const products: Product[] = [
     inStock: true,
     featured: true,
     badge: "Sale",
+    stripePriceId: "price_1TYv5NHNrnri6kZxFnY7xCyS",
   },
   /*
   {

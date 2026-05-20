@@ -1,8 +1,23 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { products } from "@/lib/data";
 import ProductCard from "@/components/shop/ProductCard";
+
+function SuccessBanner() {
+  const searchParams = useSearchParams();
+  const [visible, setVisible] = useState(searchParams.get("checkout") === "success");
+
+  if (!visible) return null;
+
+  return (
+    <div className="mb-6 flex items-center justify-between bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-xl text-sm">
+      <span>Order placed! Check your email for confirmation.</span>
+      <button onClick={() => setVisible(false)} className="ml-4 text-green-600 hover:text-green-900 font-bold leading-none">&times;</button>
+    </div>
+  );
+}
 
 const SORT_OPTIONS = [
   { value: "featured", label: "Featured" },
@@ -46,6 +61,10 @@ export default function ShopPage() {
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">Shop</h1>
         <p className="text-gray-500">Official University of Montana merchandise</p>
       </div>
+
+      <Suspense>
+        <SuccessBanner />
+      </Suspense>
 
       {/* Search + sort bar */}
       <div className="flex flex-col sm:flex-row gap-3 mb-8">
