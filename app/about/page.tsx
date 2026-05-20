@@ -99,11 +99,11 @@ export default function AboutPage() {
             </div>
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/universityofmontanacampus.jpg"
-                alt="University of Montana campus"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
+              src="/universityofmontanacampus.jpg"
+              alt="University of Montana campus"
+              className="object-cover w-full h-[512px]"
+              width={1024}
+              height={768}
               />
             </div>
           </div>
