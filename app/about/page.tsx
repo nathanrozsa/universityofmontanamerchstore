@@ -37,16 +37,8 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative py-24 bg-maroon-900 overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/main-hall.jpg"
-            alt="Main Hall at the University of Montana with the M on the hill in the background"
-            fill
-            className="object-cover opacity-15"
-          />
-        </div>
-        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-24 bg-maroon-900">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-5">About Us</h1>
           <p className="text-lg text-white/70 leading-relaxed">
             We are the official merchandise store of the University of Montana Grizzlies —
@@ -99,7 +91,7 @@ export default function AboutPage() {
             </div>
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/main-hall.jpg"
+                src="/universityofmontanamerchstorecampus.jpg"
                 alt="Main Hall at the University of Montana, a historic red brick building with a clock tower set against the green hillside with the iconic M"
                 fill
                 className="object-cover"
