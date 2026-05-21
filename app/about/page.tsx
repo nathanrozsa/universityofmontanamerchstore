@@ -91,7 +91,7 @@ export default function AboutPage() {
             </div>
             <div className="relative aspect-[16/9] rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/universityofmontanamerchstorecampus.jpg"
+                src="/UMCampus.jpg"
                 alt="Main Hall at the University of Montana, a historic red brick building with a clock tower set against the green hillside with the iconic M"
                 fill
                 className="object-cover object-center"
