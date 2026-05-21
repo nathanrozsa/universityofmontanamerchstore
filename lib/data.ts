@@ -85,7 +85,7 @@ export const products: Product[] = [
     colors: ["Maroon", "Navy", "Charcoal"],
     inStock: true,
     featured: true,
-    badge: "Sale",
+    badge: "Best Seller",
     stripePriceId: "price_1TYv5NHNrnri6kZxFnY7xCyS",
   },
   /*
