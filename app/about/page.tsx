@@ -89,12 +89,12 @@ export default function AboutPage() {
                 </Link>
               </div>
             </div>
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
+            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden shadow-xl">
               <Image
                 src="/universityofmontanamerchstorecampus.jpg"
                 alt="Main Hall at the University of Montana, a historic red brick building with a clock tower set against the green hillside with the iconic M"
                 fill
-                className="object-cover"
+                className="object-cover object-center"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
