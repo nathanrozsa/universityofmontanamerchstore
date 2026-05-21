@@ -1,7 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 import { Product } from "@/types";
-import AddToCartButton from "./AddToCartButton";
 
 interface Props {
   product: Product;
@@ -10,6 +12,25 @@ interface Props {
 export default function ProductCard({ product }: Props) {
   const displayPrice = product.salePrice ?? product.price;
   const hasDiscount = product.salePrice !== undefined;
+  const [loading, setLoading] = useState(false);
+
+  async function handleBuyNow() {
+    if (!product.stripePriceId) return;
+    setLoading(true);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ priceId: product.stripePriceId, quantity: 1 }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.open(data.url, "_blank");
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <article className="group relative bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
@@ -62,7 +83,15 @@ export default function ProductCard({ product }: Props) {
               </span>
             )}
           </div>
-          <AddToCartButton product={product} compact />
+          {product.stripePriceId && (
+            <button
+              onClick={handleBuyNow}
+              disabled={loading}
+              className="bg-maroon-900 hover:bg-maroon-800 disabled:opacity-60 text-white text-xs font-semibold px-4 py-2 rounded-full transition-colors"
+            >
+              {loading ? "Loading…" : "Buy Now"}
+            </button>
+          )}
         </div>
       </div>
     </article>
