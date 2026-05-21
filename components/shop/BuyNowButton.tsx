@@ -34,6 +34,11 @@ export default function AddToCartButton({ product, compact, selectedSize, select
       return;
     }
 
+    if (product.slug === "grizzlies-classic-tee") {
+      window.location.href = "https://buy.stripe.com/00w3cv7ke95r0KYdqK0sU02";
+      return;
+    }
+
     setLoading(true);
     setError(false);
 
