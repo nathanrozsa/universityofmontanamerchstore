@@ -40,8 +40,8 @@ export default function AboutPage() {
       <section className="relative py-24 bg-maroon-900 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/universityofmontanacampus.jpg"
-            alt="University campus"
+            src="/main-hall.jpg"
+            alt="Main Hall at the University of Montana with the M on the hill in the background"
             fill
             className="object-cover opacity-15"
           />
@@ -99,8 +99,8 @@ export default function AboutPage() {
             </div>
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/universityofmontanacampus.jpg"
-                alt="University of Montana campus"
+                src="/main-hall.jpg"
+                alt="Main Hall at the University of Montana, a historic red brick building with a clock tower set against the green hillside with the iconic M"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
