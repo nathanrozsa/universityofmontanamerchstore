@@ -24,6 +24,11 @@ export default function AddToCartButton({ product, compact, selectedSize, select
       return;
     }
 
+    if (product.slug === "grizzlies-water-bottle") {
+      window.location.href = "https://buy.stripe.com/fZu8wP9sma9v79maey0sU00";
+      return;
+    }
+
     setLoading(true);
     setError(false);
 
