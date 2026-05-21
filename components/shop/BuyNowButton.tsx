@@ -29,6 +29,11 @@ export default function AddToCartButton({ product, compact, selectedSize, select
       return;
     }
 
+    if (product.slug === "montana-script-hoodie") {
+      window.location.href = "https://buy.stripe.com/5kQ5kD33Y3L765i4Ue0sU01";
+      return;
+    }
+
     setLoading(true);
     setError(false);
 
