@@ -41,10 +41,7 @@ export const products: Product[] = [
     description: "The essential Griz tee, perfect for game day or everyday wear.",
     longDescription:
       "Show your Montana Grizzlies pride with this timeless classic tee. Made from 100% ring-spun cotton for supreme softness, featuring the iconic Grizzlies logo on the chest. Pre-shrunk to ensure a consistent fit wash after wash. Perfect for game day, campus, or casual everyday wear.",
-    images: [
-  "/universityofmontanatee.jpg",
-  "https://images.unsplash.com/photo-1559583985-c80d8ad9b29f?w=800&auto=format&fit=crop&q=80",
-],
+    images: ["/universityofmontanatee.jpg"],
     sizes: ["XS", "S", "M", "L", "XL", "2XL"],
     colors: ["Maroon", "White", "Heather Grey"],
     inStock: true,
