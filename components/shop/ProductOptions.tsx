@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Product } from "@/types";
-import AddToCartButton from "./AddToCartButton";
+import AddToCartButton from "./BuyNowButton";
 
 export default function ProductOptions({ product }: { product: Product }) {
   const [selectedSize, setSelectedSize] = useState(product.sizes?.[0]);

@@ -11,7 +11,7 @@ const quickLinks = [
 const categoryLinks = [
   { href: "/shop?category=t-shirts", label: "T-Shirts" },
   { href: "/shop?category=hoodies", label: "Hoodies" },
-  { href: "/shop?category=hats", label: "Hats & Caps" },
+  { href: "/shop?category=Water Bottle", label: "Water Bottles" },
   { href: "/shop?category=accessories", label: "Accessories" },
 ];
 

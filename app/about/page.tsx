@@ -37,16 +37,8 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative py-24 bg-maroon-900 overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/universityofmontanacampus.jpg"
-            alt="University campus"
-            fill
-            className="object-cover opacity-15"
-          />
-        </div>
-        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-24 bg-maroon-900">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-5">About Us</h1>
           <p className="text-lg text-white/70 leading-relaxed">
             We are the official merchandise store of the University of Montana Grizzlies —
@@ -97,15 +89,13 @@ export default function AboutPage() {
                 </Link>
               </div>
             </div>
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
+            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden shadow-xl">
               <Image
-              src="/universityofmontanacampus.jpg"
-              alt="University of Montana campus"
-              className="object-cover w-full h-[512px]"
-              width={1024}
-              height={768}
-              quality={100}
-              priority
+                src="/universityofmontanacampus.jpg"
+                alt="University of Montana campus"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
           </div>
