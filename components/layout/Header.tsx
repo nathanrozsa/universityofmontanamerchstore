@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { SignInButton, UserButton, useAuth } from "@clerk/nextjs";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/shop", label: "Shop" },
@@ -15,6 +15,7 @@ const navLinks = [
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const { isSignedIn } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 bg-maroon-900 text-white shadow-lg">
@@ -57,14 +58,7 @@ export default function Header() {
 
           {/* Auth + Cart + hamburger */}
           <div className="flex items-center gap-2">
-            <SignedOut>
-              <SignInButton mode="modal">
-                <button className="hidden md:inline-flex items-center px-4 py-1.5 text-sm font-medium text-white border border-white/30 rounded-lg hover:bg-white/10 transition-colors">
-                  Sign In
-                </button>
-              </SignInButton>
-            </SignedOut>
-            <SignedIn>
+            {isSignedIn ? (
               <UserButton
                 appearance={{
                   elements: {
@@ -72,7 +66,13 @@ export default function Header() {
                   },
                 }}
               />
-            </SignedIn>
+            ) : (
+              <SignInButton mode="modal">
+                <button className="hidden md:inline-flex items-center px-4 py-1.5 text-sm font-medium text-white border border-white/30 rounded-lg hover:bg-white/10 transition-colors">
+                  Sign In
+                </button>
+              </SignInButton>
+            )}
 
             <Link
               href="/shop"
