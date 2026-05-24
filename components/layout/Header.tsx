@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/shop", label: "Shop" },
@@ -54,8 +55,25 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Cart + hamburger */}
+          {/* Auth + Cart + hamburger */}
           <div className="flex items-center gap-2">
+            <SignedOut>
+              <SignInButton mode="modal">
+                <button className="hidden md:inline-flex items-center px-4 py-1.5 text-sm font-medium text-white border border-white/30 rounded-lg hover:bg-white/10 transition-colors">
+                  Sign In
+                </button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton
+                appearance={{
+                  elements: {
+                    avatarBox: "w-8 h-8",
+                  },
+                }}
+              />
+            </SignedIn>
+
             <Link
               href="/shop"
               aria-label="Shopping cart"
