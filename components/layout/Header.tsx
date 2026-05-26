@@ -4,8 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { SignInButton, UserButton, useAuth } from "@clerk/nextjs";
-
+import { UserButton, useAuth } from "@clerk/nextjs";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/shop", label: "Shop" },
@@ -68,11 +67,12 @@ export default function Header() {
                 }}
               />
             ) : (
-              <SignInButton mode="modal">
-                <button className="hidden md:inline-flex items-center px-4 py-1.5 text-sm font-medium text-white border border-white/30 rounded-lg hover:bg-white/10 transition-colors">
-                  Sign In
-                </button>
-              </SignInButton>
+              <Link
+                href="/sign-in"
+                className="hidden md:inline-flex items-center px-4 py-1.5 text-sm font-medium text-white border border-white/30 rounded-lg hover:bg-white/10 transition-colors"
+              >
+                Sign In
+              </Link>
             )}
 
             <Link
@@ -129,7 +129,7 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`py-3 text-sm font-medium border-b border-white/10 last:border-0 transition-colors ${
+                  className={`py-3 text-sm font-medium border-b border-white/10 transition-colors ${
                     active ? "text-copper-400" : "text-white/85 hover:text-white"
                   }`}
                 >
@@ -137,6 +137,15 @@ export default function Header() {
                 </Link>
               );
             })}
+            {!isSignedIn && (
+              <Link
+                href="/sign-in"
+                onClick={() => setMobileOpen(false)}
+                className="py-3 text-sm font-medium text-copper-400 hover:text-copper-300 transition-colors"
+              >
+                Sign In
+              </Link>
+            )}
           </nav>
         </div>
       )}
