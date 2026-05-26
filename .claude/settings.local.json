@@ -5,7 +5,8 @@
       "Bash(git commit -m ' *)",
       "Bash(git push *)",
       "WebSearch",
-      "Bash(Get-Content \"c:\\\\Users\\\\NathanRozsa\\\\Documents\\\\UniversityofMontanaMerchStore\\\\app\\\\about\\\\page.tsx\")"
+      "Bash(Get-Content \"c:\\\\Users\\\\NathanRozsa\\\\Documents\\\\UniversityofMontanaMerchStore\\\\app\\\\about\\\\page.tsx\")",
+      "Bash(git pull *)"
     ]
   }
 }
