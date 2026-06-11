@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 
 export default function SignUpPage() {
-  const { signUp, fetchStatus } = useSignUp();
+  const { signUp, isLoaded, setActive } = useSignUp();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,12 +19,12 @@ export default function SignUpPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (fetchStatus === "fetching") return;
+    if (!isLoaded) return;
     setLoading(true);
     setError("");
     try {
       await signUp.create({ emailAddress: email, password });
-      await signUp.verifications.sendEmailCode();
+      await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
       setPendingVerification(true);
     } catch (err: unknown) {
       const clerkErr = err as { errors?: { message: string }[] };
@@ -36,14 +36,15 @@ export default function SignUpPage() {
 
   const handleVerification = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (fetchStatus === "fetching") return;
+    if (!isLoaded) return;
     setLoading(true);
     setError("");
     try {
-      const { error } = await signUp.verifications.verifyEmailCode({ code });
-      if (error) throw { errors: [error] };
-      await signUp.finalize();
-      router.push("/");
+      const result = await signUp.attemptEmailAddressVerification({ code });
+      if (result.status === "complete") {
+        await setActive({ session: result.createdSessionId });
+        router.push("/");
+      }
     } catch (err: unknown) {
       const clerkErr = err as { errors?: { message: string }[] };
       setError(clerkErr.errors?.[0]?.message || "Invalid code. Please try again.");

@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 
 export default function SignInPage() {
-  const { signIn, fetchStatus } = useSignIn();
+  const { signIn, isLoaded, setActive } = useSignIn();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,13 +17,15 @@ export default function SignInPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (fetchStatus === "fetching") return;
+    if (!isLoaded) return;
     setLoading(true);
     setError("");
     try {
-      await signIn.create({ identifier: email, password });
-      await signIn.finalize();
-      router.push("/");
+      const result = await signIn.create({ identifier: email, password });
+      if (result.status === "complete") {
+        await setActive({ session: result.createdSessionId });
+        router.push("/");
+      }
     } catch (err: unknown) {
       const clerkErr = err as { errors?: { message: string }[] };
       setError(clerkErr.errors?.[0]?.message || "Something went wrong. Please try again.");

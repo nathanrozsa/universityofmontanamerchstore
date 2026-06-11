@@ -1,5 +1,15 @@
 import type { Metadata } from "next";
 import ContactForm from "./ContactForm";
+import dynamic from 'next/dynamic';
+
+const MapEmbed = dynamic(() => import('./MapEmbed'), {
+  ssr: false,
+  loading: () => (
+    <div className="h-full w-full flex items-center justify-center bg-gray-100 text-gray-400 text-sm">
+      Loading map...
+    </div>
+  ),
+});
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -77,15 +87,8 @@ export default function ContactPage() {
                 ))}
               </div>
 
-              {/* Map placeholder */}
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex items-center justify-center">
-                <div className="text-center text-gray-400">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-10 h-10 mx-auto mb-2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                  </svg>
-                  <p className="text-xs">University of Montana<br />Missoula, MT</p>
-                </div>
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-gray-200">
+                <MapEmbed />
               </div>
             </div>
 
