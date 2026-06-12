@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -15,9 +15,9 @@ export default function SignInPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isLoaded) return;
+    if (!isLoaded || !signIn) return;
     setLoading(true);
     setError("");
     try {
@@ -27,12 +27,19 @@ export default function SignInPage() {
         router.push("/");
       }
     } catch (err: unknown) {
-      const clerkErr = err as { errors?: { message: string }[] };
-      setError(clerkErr.errors?.[0]?.message || "Something went wrong. Please try again.");
+      const clerkErr = err as { errors?: { code: string; message: string }[] };
+      const code = clerkErr.errors?.[0]?.code;
+      if (code === "form_identifier_not_found") {
+        setError("No account found with that email address.");
+      } else if (code === "form_password_incorrect") {
+        setError("Incorrect password. Please try again.");
+      } else {
+        setError(clerkErr.errors?.[0]?.message || "Something went wrong. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
-  };
+  }, [isLoaded, signIn, setActive, email, password, router]);
 
   return (
     <div className="min-h-screen bg-maroon-950 flex items-center justify-center py-16 px-4">
