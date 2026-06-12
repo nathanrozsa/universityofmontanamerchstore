@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 
 export default function SignInPage() {
-  const { signIn, isLoaded, setActive } = useSignIn();
+  const { signIn, fetchStatus } = useSignIn();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,31 +15,22 @@ export default function SignInPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = useCallback(async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isLoaded || !signIn) return;
+    if (fetchStatus === "fetching") return;
     setLoading(true);
     setError("");
     try {
-      const result = await signIn.create({ identifier: email, password });
-      if (result.status === "complete") {
-        await setActive({ session: result.createdSessionId });
-        router.push("/");
-      }
+      await signIn.create({ identifier: email, password });
+      await signIn.finalize();
+      router.push("/");
     } catch (err: unknown) {
-      const clerkErr = err as { errors?: { code: string; message: string }[] };
-      const code = clerkErr.errors?.[0]?.code;
-      if (code === "form_identifier_not_found") {
-        setError("No account found with that email address.");
-      } else if (code === "form_password_incorrect") {
-        setError("Incorrect password. Please try again.");
-      } else {
-        setError(clerkErr.errors?.[0]?.message || "Something went wrong. Please try again.");
-      }
+      const clerkErr = err as { errors?: { message: string }[] };
+      setError(clerkErr.errors?.[0]?.message || "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
-  }, [isLoaded, signIn, setActive, email, password, router]);
+  };
 
   return (
     <div className="min-h-screen bg-maroon-950 flex items-center justify-center py-16 px-4">
