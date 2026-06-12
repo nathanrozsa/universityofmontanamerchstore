@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 
 export default function SignUpPage() {
-  const { signUp, isLoaded, setActive } = useSignUp();
+  const { signUp } = useSignUp();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,39 +19,47 @@ export default function SignUpPage() {
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isLoaded || !signUp) return;
+    if (!signUp) return;
     setLoading(true);
     setError("");
     try {
-      await signUp.create({ emailAddress: email, password });
-      await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
+      const { error: createError } = await signUp.create({ emailAddress: email, password });
+      if (createError) {
+        setError(createError.message || "Something went wrong. Please try again.");
+        return;
+      }
+      const { error: sendError } = await signUp.verifications.sendEmailCode();
+      if (sendError) {
+        setError(sendError.message || "Failed to send verification code.");
+        return;
+      }
       setPendingVerification(true);
-    } catch (err: unknown) {
-      const clerkErr = err as { errors?: { message: string }[] };
-      setError(clerkErr.errors?.[0]?.message || "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
-  }, [isLoaded, signUp, email, password]);
+  }, [signUp, email, password]);
 
   const handleVerification = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isLoaded || !signUp) return;
+    if (!signUp) return;
     setLoading(true);
     setError("");
     try {
-      const result = await signUp.attemptEmailAddressVerification({ code });
-      if (result.status === "complete") {
-        await setActive({ session: result.createdSessionId });
-        router.push("/");
+      const { error: verifyError } = await signUp.verifications.verifyEmailCode({ code });
+      if (verifyError) {
+        setError(verifyError.message || "Invalid code. Please try again.");
+        return;
       }
-    } catch (err: unknown) {
-      const clerkErr = err as { errors?: { message: string }[] };
-      setError(clerkErr.errors?.[0]?.message || "Invalid code. Please try again.");
+      const { error: finalizeError } = await signUp.finalize();
+      if (finalizeError) {
+        setError(finalizeError.message || "Something went wrong. Please try again.");
+        return;
+      }
+      router.push("/");
     } finally {
       setLoading(false);
     }
-  }, [isLoaded, signUp, setActive, code, router]);
+  }, [signUp, code, router]);
 
   return (
     <div className="min-h-screen bg-maroon-950 flex items-center justify-center py-16 px-4">
@@ -103,9 +111,11 @@ export default function SignUpPage() {
                   </div>
                 </div>
 
+                <div id="clerk-captcha" />
+
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={loading || !signUp}
                   className="w-full bg-copper-600 hover:bg-copper-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-xl transition-all hover:scale-[1.01]"
                 >
                   {loading ? "Creating account…" : "Create Account"}
@@ -150,7 +160,7 @@ export default function SignUpPage() {
 
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={loading || !signUp}
                   className="w-full bg-copper-600 hover:bg-copper-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-xl transition-all hover:scale-[1.01]"
                 >
                   {loading ? "Verifying…" : "Verify Email"}
