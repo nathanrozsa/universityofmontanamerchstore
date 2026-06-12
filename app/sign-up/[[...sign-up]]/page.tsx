@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useSignUp } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -17,9 +17,9 @@ export default function SignUpPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isLoaded) return;
+    if (!isLoaded || !signUp) return;
     setLoading(true);
     setError("");
     try {
@@ -32,11 +32,11 @@ export default function SignUpPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [isLoaded, signUp, email, password]);
 
-  const handleVerification = async (e: React.FormEvent) => {
+  const handleVerification = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isLoaded) return;
+    if (!isLoaded || !signUp) return;
     setLoading(true);
     setError("");
     try {
@@ -51,7 +51,7 @@ export default function SignUpPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [isLoaded, signUp, setActive, code, router]);
 
   return (
     <div className="min-h-screen bg-maroon-950 flex items-center justify-center py-16 px-4">
