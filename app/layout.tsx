@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { CartProvider } from "@/context/CartContext";
 import { ClerkProvider } from "@clerk/nextjs";
+import GrizChatbot from "@/components/chatbot/GrizChatbot";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,6 +43,7 @@ export default function RootLayout({
               <main className="flex-1">{children}</main>
               <Footer />
             </div>
+            <GrizChatbot />
           </CartProvider>
         </body>
       </html>
