@@ -1,15 +1,13 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { useSignIn, useClerk } from "@clerk/nextjs";
-import { isClerkAPIResponseError } from "@clerk/nextjs/errors";
+import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 
 export default function SignInPage() {
-  const { signIn, isLoaded } = useSignIn();
-  const { setActive } = useClerk();
+  const { signIn, fetchStatus } = useSignIn();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,27 +17,22 @@ export default function SignInPage() {
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isLoaded || !signIn) return;
     setLoading(true);
     setError("");
-    try {
-      const result = await signIn.create({ identifier: email, password });
-      if (result.status === "complete") {
-        await setActive({ session: result.createdSessionId });
-        router.push("/");
-      } else {
-        setError("Sign in could not be completed. Please try again.");
-      }
-    } catch (err) {
-      if (isClerkAPIResponseError(err)) {
-        setError(err.errors[0]?.longMessage ?? err.errors[0]?.message ?? "Something went wrong.");
-      } else {
-        setError("Something went wrong. Please try again.");
-      }
-    } finally {
+    const { error: createError } = await signIn.create({ identifier: email, password });
+    if (createError) {
+      setError(createError.longMessage ?? createError.message ?? "Something went wrong.");
       setLoading(false);
+      return;
     }
-  }, [isLoaded, signIn, setActive, email, password, router]);
+    const { error: finalizeError } = await signIn.finalize();
+    if (finalizeError) {
+      setError(finalizeError.longMessage ?? finalizeError.message ?? "Something went wrong.");
+      setLoading(false);
+      return;
+    }
+    router.push("/");
+  }, [signIn, email, password, router]);
 
   return (
     <div className="min-h-screen bg-maroon-950 flex items-center justify-center py-16 px-4">
@@ -91,7 +84,7 @@ export default function SignInPage() {
 
             <button
               type="submit"
-              disabled={loading || !isLoaded}
+              disabled={loading || fetchStatus === "fetching"}
               className="w-full bg-copper-600 hover:bg-copper-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-xl transition-all hover:scale-[1.01]"
             >
               {loading ? "Signing in…" : "Sign In"}
